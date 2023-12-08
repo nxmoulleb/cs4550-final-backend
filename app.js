@@ -4,6 +4,7 @@ import session from "express-session";
 import cors from "cors";
 import mongoose from "mongoose";
 import UserRoutes from "./users/userRoutes.js";
+import CollectionRoutes from "./collection/collectionRoutes.js";
 mongoose.connect("mongodb://127.0.0.1:27017/final");
 const app = express();
 app.use(
@@ -20,4 +21,5 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(express.json());
 UserRoutes(app);
+CollectionRoutes(app);
 app.listen(4000);

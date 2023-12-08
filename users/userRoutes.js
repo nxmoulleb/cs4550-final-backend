@@ -1,6 +1,5 @@
 import * as dao from "./userDao.js";
 function UserRoutes(app) {
-  const createUser = async (req, res) => {};
   const deleteUser = async (req, res) => {};
   const findAllUsers = async (req, res) => {};
   const findUserById = async (req, res) => {};
@@ -45,7 +44,6 @@ function UserRoutes(app) {
   const account = async (req, res) => {
     res.json(req.session["currentUser"]);
   };
-  app.post("/api/users", createUser);
   app.get("/api/users", findAllUsers);
   app.get("/api/users/:userId", findUserById);
   app.put("/api/users/:userId", updateUser);
