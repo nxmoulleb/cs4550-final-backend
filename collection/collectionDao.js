@@ -21,9 +21,20 @@ export const updateCollection = (collectionId, collection) => {
   return model.updateOne({ _id: collectionId }, { $set: collection });
 };
 export const updateCollectionItems = (userId, item) => {
-  console.log("itemData", item);
   return model.updateOne({ ownerId: userId }, { $push: { itemData: [item] } });
 };
 export const deleteCollection = (collectionId) => {
-  return model.deleteOne({ _id: collectionId })
+  return model.deleteOne({ _id: collectionId });
+};
+export const deleteItemInCollection = (userId, objectId) => {
+  return model.updateOne(
+    { ownerId: userId },
+    { $pull: { itemData: { objectId: objectId } } }
+  );
+};
+export const updateCollectionCollaberators = (ownerId, userData) => {
+  return model.updateOne(
+    { ownerId: ownerId },
+    { $push: { collaberators: [userData] } }
+  );
 };

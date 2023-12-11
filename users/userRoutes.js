@@ -1,8 +1,15 @@
 import * as dao from "./userDao.js";
 function UserRoutes(app) {
   const deleteUser = async (req, res) => {};
-  const findAllUsers = async (req, res) => {};
-  const findUserById = async (req, res) => {};
+  const findAllUsers = async (req, res) => {
+    const status = await dao.findAllUsers();
+    res.json(status)
+  };
+  const findUserById = async (req, res) => {
+    const { userId } = req.params;
+    const status = await dao.findUserById(userId);
+    res.json(status);
+  };
   const updateUser = async (req, res) => {
     const { userId } = req.params;
     const status = await dao.updateUser(userId, req.body)

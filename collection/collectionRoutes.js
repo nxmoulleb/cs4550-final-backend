@@ -33,9 +33,22 @@ function CollectionRoutes(app) {
     const status = await dao.updateCollectionItems(id, req.body);
     res.json(status);
   }
+  const updateCollectionCollaberators = async (req, res) => {
+    const { id } = req.params;
+    const { userData } = req.body;
+    console.log(userData)
+    const status = await dao.updateCollectionCollaberators(id, req.body.userData);
+    res.json(status);
+  }
   const deleteCollection = async (req, res) => {
     const { id } = req.params;
     const status = await dao.deleteCollection(id);
+    res.json(status);
+  };
+  const deleteItemInCollection = async (req, res) => {
+    const { id } = req.params;
+    const { itemId } = req.params;
+    const status = await dao.deleteItemInCollection(id, itemId);
     res.json(status);
   };
 
@@ -46,6 +59,8 @@ function CollectionRoutes(app) {
   app.get("/api/collections/ownerId/:id", findCollectionByOwnerId);
   app.put("/api/collections/:id", updateCollection);
   app.put("/api/collections/items/:id", updateCollectionItems);
+  app.put("/api/collections/collab/:id", updateCollectionCollaberators);
   app.delete("/api/collections/:id", deleteCollection);
+  app.delete("/api/collections/items/:id/:itemId", deleteItemInCollection);
 }
 export default CollectionRoutes;
