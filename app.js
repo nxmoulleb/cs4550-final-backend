@@ -5,6 +5,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import UserRoutes from "./users/userRoutes.js";
 import CollectionRoutes from "./collection/collectionRoutes.js";
+import ReviewRoutes from "./reviews/reviewRoutes.js";
 mongoose.connect("mongodb://127.0.0.1:27017/final");
 const app = express();
 app.use(
@@ -22,4 +23,5 @@ app.use(session(sessionOptions));
 app.use(express.json());
 UserRoutes(app);
 CollectionRoutes(app);
+ReviewRoutes(app);
 app.listen(4000);

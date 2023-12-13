@@ -8,6 +8,10 @@ function CollectionRoutes(app) {
     const status = await dao.findAllCollections();
     res.json(status);
   };
+  const findRecentCollections = async (req, res) => {
+    const status = await dao.findRecentCollections();
+    res.json(status);
+  }
   const findCollectionByCollaberatorId = async (req, res) => {
     const { id } = req.params;
     const status = await dao.findCollectionByCollaberatorId(id);
@@ -23,6 +27,16 @@ function CollectionRoutes(app) {
     const status = await dao.findCollectionByOwnerId(id);
     res.json(status);
   };
+  const findReviewerCollections = async (req, res) => {
+    const { id } = req.params;
+    const status = await dao.findReviewerCollections(id);
+    res.json(status);
+  }
+  const findObjectInCollections = async (req, res) => {
+    const { id } = req.params;
+    const status = await dao.findObjectInCollections(id);
+    res.json(status);
+  }
   const updateCollection = async (req, res) => {
     const { id } = req.params;
     const status = await dao.updateCollection(id, req.body);
@@ -36,7 +50,6 @@ function CollectionRoutes(app) {
   const updateCollectionCollaberators = async (req, res) => {
     const { id } = req.params;
     const { userData } = req.body;
-    console.log(userData)
     const status = await dao.updateCollectionCollaberators(id, req.body.userData);
     res.json(status);
   }
@@ -54,9 +67,12 @@ function CollectionRoutes(app) {
 
   app.post("/api/collections", createCollection);
   app.get("/api/collections", findAllCollections);
+  app.get("/api/collections/recent", findRecentCollections);
   app.get("/api/collections/collaberator/:id", findCollectionByCollaberatorId);
   app.get("/api/collections/ownerName/:username", findCollectionByOwnerUsername);
   app.get("/api/collections/ownerId/:id", findCollectionByOwnerId);
+  app.get("/api/collections/reviewer/:id", findReviewerCollections);
+  app.get("/api/collections/object/:id", findObjectInCollections);
   app.put("/api/collections/:id", updateCollection);
   app.put("/api/collections/items/:id", updateCollectionItems);
   app.put("/api/collections/collab/:id", updateCollectionCollaberators);

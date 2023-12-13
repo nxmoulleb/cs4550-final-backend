@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 const collectionSchema = new mongoose.Schema({
     ownerUsername: { type: String, required: true, unique: true },
     ownerId: { type: String, required: true, unique: true },
+    lastUpdated: { type: Number, required: true },
     itemData: [{objectId: String, objectName: String, artistName: String}],
     collaberators: [{userId: String, userName: String}],
   },
